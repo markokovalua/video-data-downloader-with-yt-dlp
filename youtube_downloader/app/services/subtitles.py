@@ -70,10 +70,7 @@ def sync_download_subtitles(url: str):
             available_auto_subs = info.get("automatic_captions")
             ua_url = available_auto_subs.get("uk")[-2]["url"]
             en_url = available_auto_subs.get("en")[-2]["url"]
-
             logger.error(f"ua_url {ua_url} en_url {en_url}")
-
-            ua_resp = en_resp = ""
             with ThreadPoolExecutor(max_workers=2) as executor:
                 if ua_url:
                     ua_resp = download_subs_worker(ua_url, "./downloads/tmp_ua.srt")
